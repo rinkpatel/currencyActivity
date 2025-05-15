@@ -7,5 +7,11 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  base:'/currencyActivity'
+  base: '/currencyActivity/',  // Note the leading and trailing slashes
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    emptyOutDir: true,
+  }
 });
