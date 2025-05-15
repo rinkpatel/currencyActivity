@@ -10,26 +10,21 @@ const AddRoutineForm: React.FC<AddRoutineFormProps> = ({ onAdd }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [coinValue, setCoinValue] = useState(1);
-  const [category, setCategory] = useState('personal');
-
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
       onAdd({
         title: title.trim(),
         description: description.trim() || 'Custom routine',
-        coinValue,
-        category
+        coinValue: 1,
+        category: 'personal'
       });
       setTitle('');
       setDescription('');
-      setCoinValue(1);
       setIsExpanded(false);
     }
   };
-
-  const categories = ['personal', 'health', 'wellbeing', 'home', 'growth'];
 
   if (!isExpanded) {
     return (
@@ -62,35 +57,6 @@ const AddRoutineForm: React.FC<AddRoutineFormProps> = ({ onAdd }) => {
           onChange={(e) => setDescription(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
         />
-        
-        <div className="flex space-x-3">
-          <div className="flex-1">
-            <label className="block text-sm text-gray-600 mb-1">Coins</label>
-            <input
-              type="number"
-              min="1"
-              max="10"
-              value={coinValue}
-              onChange={(e) => setCoinValue(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-            />
-          </div>
-          
-          <div className="flex-1">
-            <label className="block text-sm text-gray-600 mb-1">Category</label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
         
         <div className="flex justify-end space-x-2 pt-2">
           <button

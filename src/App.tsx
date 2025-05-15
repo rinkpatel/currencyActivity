@@ -189,13 +189,15 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
       <div className="max-w-md mx-auto px-3 py-4">
-        <Header />
-        
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-800 mb-2 sm:mb-0">
-            Cash in your opportunities!
-          </h2>
-          <CoinBag coinCount={getTotalCoins(coinsByDay)} bagRef={coinBagRef} />
+        <div className="sticky top-0 z-50 pt-2 pb-4 bg-gradient-to-b from-amber-50 to-orange-50">
+          <Header />
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2 sm:mb-0">
+              Cash in your opportunities!
+            </h2>
+            <CoinBag coinCount={getTotalCoins(coinsByDay)} bagRef={coinBagRef} />
+          </div>
         </div>
         
         <DailyProgress 
