@@ -9,6 +9,7 @@ interface RoutineListProps {
   onComplete: (id: string, element: HTMLElement) => void;
   onIncrement?: (id: string) => void;
   onDecrement?: (id: string) => void;
+  onToggleCheck?: (id: string) => void;
 }
 
 const RoutineList: React.FC<RoutineListProps> = ({ 
@@ -17,7 +18,8 @@ const RoutineList: React.FC<RoutineListProps> = ({
   completedTasks,
   onComplete,
   onIncrement,
-  onDecrement
+  onDecrement,
+  onToggleCheck
 }) => {
   const getCompletionCount = (taskId: string): number => {
     const task = completedTasks.find(t => t.id === taskId);
@@ -35,6 +37,7 @@ const RoutineList: React.FC<RoutineListProps> = ({
           onComplete={onComplete}
           onIncrement={onIncrement}
           onDecrement={onDecrement}
+          onToggleCheck={onToggleCheck}
         />
       ))}
     </div>

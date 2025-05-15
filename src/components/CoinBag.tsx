@@ -17,7 +17,7 @@ const CoinBag: React.FC<CoinBagProps> = ({ coinCount, bagRef }) => {
         <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-300 rounded-full animate-pulse"></div>
       </div>
       <div className="font-bold text-xl text-yellow-100">
-        {coinCount} <span className="text-xs uppercase tracking-wider opacity-80">Coins</span>
+        {coinCount === Infinity ? "Infinite" : (coinCount ?? 0)} <span className="text-xs uppercase tracking-wider opacity-80">Coins</span>
       </div>
     </div>
   );

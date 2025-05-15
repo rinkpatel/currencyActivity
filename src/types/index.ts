@@ -4,6 +4,7 @@ export interface RoutineItem {
   description: string;
   coinValue: number;
   category: string;
+  checked?: boolean;
 }
 
 export interface CompletedTask {
