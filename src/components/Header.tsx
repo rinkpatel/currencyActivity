@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   return (
     <header className="mb-4">
       <h1 className="text-2xl font-bold text-gray-800 mb-1">
-        Daily Routines
+        Daily Opportunites
       </h1>
       <div className="flex items-center text-gray-500 space-x-1.5 text-sm">
         <Calendar size={16} />
