@@ -78,20 +78,38 @@ function App() {
       const completedTask = todayCompletedTasks.find(t => t.id === taskId);
       if (!completedTask) return;
       
-      // Get the value to remove from today's coins
-      const valueToRemove = task.coinValue * completedTask.count;
-      
       // Remove the task from completedTasks
       setCompletedTasks(prev => 
         prev.filter(t => !(t.id === taskId && isSameDay(new Date(t.completedAt), new Date())))
       );
       
-      // Update coins for today
-      const today = getDateKey(new Date());
-      setCoinsByDay(prev => ({
-        ...prev,
-        [today]: Math.max(0, (prev[today] || 0) - valueToRemove)
-      }));
+      // Special handling for Infinity coin value tasks
+      if (task.coinValue === Infinity) {
+        // For Infinity-valued tasks, we don't subtract anything
+        // Instead, we recalculate today's coins based on remaining completed tasks
+        const today = getDateKey(new Date());
+        const remainingTasks = todayCompletedTasks.filter(t => t.id !== taskId);
+        
+        // Recalculate the total coins for today based on remaining tasks
+        const newTotalCoins = remainingTasks.reduce((total, t) => {
+          const taskItem = routineItems.find(item => item.id === t.id);
+          if (!taskItem) return total;
+          return total + (taskItem.coinValue === Infinity ? 0 : taskItem.coinValue * t.count);
+        }, 0);
+        
+        setCoinsByDay(prev => ({
+          ...prev,
+          [today]: newTotalCoins
+        }));
+      } else {
+        // For regular tasks, subtract the value normally
+        const valueToRemove = task.coinValue * completedTask.count;
+        const today = getDateKey(new Date());
+        setCoinsByDay(prev => ({
+          ...prev,
+          [today]: Math.max(0, (prev[today] || 0) - valueToRemove)
+        }));
+      }
     } else {
       // If not completed, mark it as completed
       if (coinBagRef.current) {
